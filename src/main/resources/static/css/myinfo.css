@@ -1,0 +1,39 @@
+
+p{
+    margin: 0px;
+    padding: 0px;
+}
+
+.left{
+    margin-top: 30px;
+    float:left;
+    width: 300px;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+.left-title{
+    float:left;
+    width: 100px;
+    padding-top: 20px;
+}
+.left img{
+    float:left;
+}
+.right{
+    margin-top: 30px;
+    float: left;
+    border-left: 1px dashed #ddd;
+    padding-left: 25px;
+}
+.right p{
+    line-height: 40px;
+    font-size: 14px;
+    color: #3d3d3d;
+}
+
+.right-title{
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+    margin-right: 20px;
+}

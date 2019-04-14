@@ -1,6 +1,7 @@
 package com.noerrorsnowarning.conferencesystem.Controller;
 
 import com.noerrorsnowarning.conferencesystem.Service.*;
+import com.noerrorsnowarning.conferencesystem.domain.Commend;
 import com.noerrorsnowarning.conferencesystem.domain.ConferenceInfo;
 import com.noerrorsnowarning.conferencesystem.domain.Equipment;
 import com.noerrorsnowarning.conferencesystem.domain.Room;
@@ -48,7 +49,7 @@ public class BookController {
         ConferenceInfo conferenceInfo=conferenceService.getCon(roomID,user);
         conferenceInfo.setRoomID(roomID);
         model.addAttribute("conInfo",conferenceInfo);
-        return "html/order";
+        return "html/book2";
     }
 
     @RequestMapping(value = "/searchRoom", method = RequestMethod.POST)
@@ -83,6 +84,14 @@ public class BookController {
 
         model.addAttribute("equipList", equipmentList);
         model.addAttribute("roomList", roomList);
+
+        Commend commend1 = new Commend("2019-04-14", "08:00", "10:00", 10, "asdf");
+        Commend commend2 = new Commend("2019-04-14", "08:00", "10:00", 10, "asdf");
+        Commend commend3 = new Commend("2019-04-14", "08:00", "10:00", 10, "asdf");
+
+        model.addAttribute("commend1",commend1);
+        model.addAttribute("commend2",commend2);
+        model.addAttribute("commend3",commend3);
 
         return "html/book";
     }
@@ -125,6 +134,14 @@ public class BookController {
         roomList = roomAndEquipService.roomAndEquip(roomList, equipmentList);
 
         model.addAttribute("roomList", roomList);
+
+        Commend commend1 = new Commend("2019-04-14", "08:00", "10:00", 10, "asdf");
+        Commend commend2 = new Commend("2019-04-14", "08:00", "10:00", 10, "asdf");
+        Commend commend3 = new Commend("2019-04-14", "08:00", "10:00", 10, "asdf");
+
+        model.addAttribute("commend1",commend1);
+        model.addAttribute("commend2",commend2);
+        model.addAttribute("commend3",commend3);
         return model;
 
     }

@@ -7,6 +7,11 @@ body{
 	font-weight: lighter;
 }
 
+p{
+	padding: 0px;
+	margin: 0px;
+}
+
 .vague{
 	width: 800px;
 	border: #000000 thin solid;
@@ -89,14 +94,36 @@ button{
 	border-radius:2px;
 	text-align: center;
 }
-
-.comment{
+.commendbox{
+	width: 100%;
+	height: 127px;
+}
+.commend{
 	float:left;
-	width: auto;
-	padding-left: 20px;
+	width: 220px;
+	height: 92px;
+	margin-left: 20px;
 	margin-top: 20px;
+	padding-top: 14px;
 }
 
+#commend1{
+	background: url("../img/commend1.png") no-repeat;
+}
+
+#commend2{
+	background: url("../img/commend2.png") no-repeat;
+}
+
+#commend3{
+	background: url("../img/commend3.png") no-repeat;
+}
+
+.commend p{
+	text-indent: 1.7em;
+	font-size: 12px;
+	margin-bottom: 2px;
+}
 .margin{
 	padding-bottom: 10px;
 }

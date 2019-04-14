@@ -3,19 +3,21 @@
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
+	<link rel="stylesheet" href="/css/myinfo.css" />
 </head>
 	
 <body>
-	<!--<img src="/img/myinfo.jpg" width="800px">-->
-	<ul>
-		<form th:action="@{/updateMobilePhone}" method="post">
-			<li>姓名：<span th:text="${info.Sname}"/></li>
-			<li>工号：<span th:text="${info.StaffID}"/></li>
-			<li>性别：<span th:text="${info.Ssex}"/></li>
-			<li>职位：<span th:text="${info.Spost}"/></li>
-			<li>手机号:<input th:type="text" th:value="${info.Smobilenum}" name="num"/></li>
-			<button>修改</button>
-		</form>
-	</ul>
+<div>
+	<div class="left">
+		<div class="left-title">头像：</div>
+		<img src="../img/001.jpg" width="80px" height="80px"/>
+	</div>
+	<div class="right">
+		<p><span class="right-title">姓&nbsp;&nbsp;名：</span><span th:text="${info.Sname}"/></p>
+		<p><span class="right-title">工&nbsp;&nbsp;号：</span><span th:text="${info.StaffID}"/></p>
+		<p><span class="right-title">性&nbsp;&nbsp;别：</span><span th:text="${info.Ssex}"/></p>
+		<p><span class="right-title">职&nbsp;&nbsp;位：</span><span th:text="${info.Spost}"/></p>
+		<p><span class="right-title">手机号码:</span><span th:text="${info.Smobilenum}"/></li>
+	</div>
 </body>
 </html>

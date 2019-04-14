@@ -78,7 +78,11 @@ public class indexController {
 
         //获取设备信息显示到前端
         List<Equipment> equipList = equipmentService.getEquips();
-        model.addAttribute("equipList", equipList);
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Equipment e : equipList) {
+            stringBuilder.append(e.getEname() + " ");
+        }
+        model.addAttribute("equip", stringBuilder);
 
         return "html/addmeetingroom.html";
     }

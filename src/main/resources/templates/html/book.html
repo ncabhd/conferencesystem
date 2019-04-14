@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<!--- 模糊查询输入 -->
 <!--	<div class="vague">
 		<form th:action="@{/goTo}" method="post">
 			您将于
@@ -40,16 +41,27 @@
 			<button id="vaguefind" type="submit">查找</button>
 		</form>
 	</div>--->
-	<div class="comment" onclick="fillin(1)">
-		<img width="220px" src="/img/commend1.png"/>
+<div class="commendbox">
+	<div id="commend1" class="commend" onclick="fillin(1)">
+		<p>会议日期：<span id="data1" th:text="${commend1.date}"/></p>
+		<p>开始时间：<span id="start1" th:text="${commend1.start}"/>&nbsp;&nbsp;结束时间：<span id="end1" th:text="${commend1.end}"/></p>
+		<p>参会人数：<span id="number1" th:text="${commend1.num}"/></p>
+		<p>设备：<span id="equip1" th:text="${commend1.equip}"/></p>
 	</div>
-	<div class="comment" onclick="fillin(2)">
-		<img width="220px" src="/img/commend2.png"/>
+	<div id="commend2" class="commend" onclick="fillin(2)">
+		<p>会议日期：<span id="data2" th:text="${commend1.date}"/></p>
+		<p>开始时间：<span id="start2" th:text="${commend2.start}"/>&nbsp;&nbsp;结束时间：<span id="end2" th:text="${commend2.end}"/></p>
+		<p>参会人数：<span id="number2" th:text="${commend2.num}"/></p>
+		<p>设备：<span id="equip2" th:text="${commend2.equip}"/></p>
 	</div>
-	<div class="comment" onclick="fillin(3)">
-		<img width="220px" src="/img/commend3.png"/>
+	<div id="commend3" class="commend" onclick="fillin(3)">
+		<p>会议日期：<span id="data3" th:text="${commend1.date}"/></p>
+		<p>开始时间：<span id="start3" th:text="${commend3.start}"/>&nbsp;&nbsp;结束时间：<span id="end3" th:text="${commend3.end}"/></p>
+		<p>参会人数：<span id="number3" th:text="${commend3.num}"/></p>
+		<p>设备：<span id="equip3" th:text="${commend3.equip}"/></p>
 	</div>
-<br><br><br><br><br><br>
+</div>
+
 	<div class="search">
 	<form th:action="@{/searchRoom}" method="post" id="searchform1">                <!----精确查找表单---->
 		会议室编号：
@@ -59,14 +71,14 @@
 		<button type="submit">精确查找</button>
 	</form>
 	</div>
-
+	
 	<form th:action="@{/search}" method="post" id="searchform2">                  <!-----条件查找表单----->
  	<div class="choice">
 		 <div class="txt">
 			 <span id="data_txt">会议日期：</span><br>
 			 <input type="date" id="data" name="date"/>
 		 </div>
-		 <div class="txt">
+		 <div class="txt">	 
 			 <span id="available_time_start_txt">开始占用时间：</span>
 			 <span id="available_time_end_txt">结束占用时间：</span><br>
 			 <input type="time" id="available_time_start" name="startTime"/>
@@ -91,7 +103,7 @@
 		<button id="find" type="submit">查找</button>
 	</div>
 	</form>
-
+	
 	<div class="mytable">
 		<table class="delete" width="100%">
 			<tr>
@@ -124,12 +136,25 @@
 	<script type="text/javascript">
 		function fillin(n) {
 			var n = n.toString();
+
 			var data = document.getElementById("data");
 			var start = document.getElementById("available_time_start");
 			var end = document.getElementById("available_time_end");
 			var number = document.getElementById("number");
 			var equip = document.getElementsByName("equip");
-			switch (n) {
+
+			var data0 = document.getElementById("data" + n);
+			var start0 = document.getElementById("start" + n);
+			var end0 = document.getElementById("end" + n);
+			var number0 = document.getElementById("number" + n);
+			var equip0 = document.getElementsByName("equip" + n);
+
+			data.value=data0.innerText;
+			start.value=start0.innerText;
+			end.value=end0.innerText;
+			number.value=number0.innerText;
+
+		/*	switch (n) {
 				case '1':
 					data.value="2019-03-28";
 					start.value="09:30";
@@ -159,7 +184,7 @@
 					equip[0].checked="true";
 					equip[1].checked="true";
 					break;
-			}
+			}*/
 		}
 		function page(){
 			window.location.href="book2.html";

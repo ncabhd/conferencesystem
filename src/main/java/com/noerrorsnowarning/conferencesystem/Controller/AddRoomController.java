@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -29,23 +30,39 @@ public class AddRoomController {
 
     @RequestMapping(value = "/addRoom", method = RequestMethod.POST)
     @Access(auths = {"admin"})
+    @ResponseBody
     public String addRoom(HttpServletRequest request, Model model) throws ParseException {
 
-        //先获取所有设备列表
-        List<Equipment> equipmentList = equipmentService.getEquips();
-        String[] equip = request.getParameterValues("equip");
+        String id = request.getParameter("id");
+        System.out.println(id);
+//
+//        //先获取所有设备列表
+//        List<Equipment> equipmentList = equipmentService.getEquips();
+//        String[] equip = request.getParameterValues("equip");
+//
+//        int result = roomService.RoomInsert(request, equip, equipmentList.size());
+//
+//        if (result == 1) {
+//            model.addAttribute("message", "插入成功");
+//        } else {
+//            model.addAttribute("message", "插入失败");
+//        }
+//
+//        model.addAttribute("equipList", equipmentList);
 
-        int result = roomService.RoomInsert(request, equip, equipmentList.size());
+//        return "html/addmeetingroom.html";
+        return "1";
+    }
 
-        if (result == 1) {
-            model.addAttribute("message", "插入成功");
-        } else {
-            model.addAttribute("message", "插入失败");
-        }
+    @RequestMapping(value = "/resetRoom", method = RequestMethod.POST)
+    @Access(auths = {"admin"})
+    @ResponseBody
+    public String resetRoom(HttpServletRequest request) {
 
-        model.addAttribute("equipList", equipmentList);
+        String id = request.getParameter("id");
+        System.out.println(id);
+        return "1";
 
-        return "html/addmeetingroom.html";
     }
 
 }

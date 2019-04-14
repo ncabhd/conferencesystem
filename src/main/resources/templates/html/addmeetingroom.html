@@ -1,13 +1,15 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head>
-<meta charset="utf-8">
-<title>无标题文档</title>
+	<meta charset="utf-8">
+	<title>无标题文档</title>
 	<link rel="stylesheet" href="/css/tablestyle.css" />
+	<script src="/js/jquery_3.3.1_min.js"></script>
 </head>
 
 <body>
-<table class="delete">
+<input id="equip" type="hidden" th:value="${equip}" />
+<table id="meetingroom">
 	<tr>
 		<th>编号</th>
 		<th>名称</th>
@@ -16,15 +18,17 @@
 		<th>等级</th>
 		<th>可使用时段</th>
 		<th>设备</th>
+		<th></th>
 	</tr>
-	<tr id="001">
-		<td id="001_1">10000</td>
-		<td id="001_2">101会议室</td>
-		<td id="001_3">广b101</td>
+	<tr id="10000">
+		<td ><input id="10000_1" readonly="readonly">10000</input></td>
+		<td id="10000_2">101会议室</td>
+		<td id="10000_3">广b101</td>
 		<td>23</td>
-		<td id="001_4">L1</td>
-		<td id="001_5">8:00-20:00</td>
-		<td id="001_6">话筒 网络通话</td>
+		<td id="10000_4">L1</td>
+		<td id="10000_5">8:00-20:00</td>
+		<td id="10000_6">话筒 网络通话</td>
+		<td id="10000_7"><button id="10000_reset" class="reset" onclick="reset(10000)">修改</button></td>
 	</tr>
 	<tr>
 		<td>10002</td>
@@ -34,6 +38,7 @@
 		<td>L2</td>
 		<td>8:00-20:00</td>
 		<td>投影仪 话筒 网络通话</td>
+		<td><button id="002_reset" class="reset" onclick="reset(002)">修改</button></td>
 	</tr>
 	<tr>
 		<td>10003</td>
@@ -43,6 +48,7 @@
 		<td>L2</td>
 		<td>8:00-20:00</td>
 		<td>投影仪 话筒</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>10004</td>
@@ -52,6 +58,7 @@
 		<td>L1</td>
 		<td>8:00-20:00</td>
 		<td>投影仪 话筒</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>10005</td>
@@ -61,6 +68,7 @@
 		<td>L1</td>
 		<td>8:00-20:00</td>
 		<td>投影仪 网络通话</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>10006</td>
@@ -70,6 +78,7 @@
 		<td>L1</td>
 		<td>8:00-20:00</td>
 		<td>无</td>
+		<td></td>
 	</tr>
 </table>
 <!---
@@ -93,7 +102,154 @@
 	</form>
 </div>
 --->
-<button style="float:right;margin-right: 190px;margin-top: 15px;padding-bottom: 5px;padding-top: 5px;">添加</button>
-<button style="float:right;margin-top: 15px;padding-bottom: 5px;padding-top: 5px;">修改</button>
+<button id="bt_add" onclick="addmeetingroom()">添加</button>
 </body>
 </html>
+<script>
+	function fillin() {
+		var table=document.getElementById("meetingroom");
+		var n=table.length;
+		var tr=table.insertRow();
+
+		//填写会议室编号
+		var CID=document.createElement("input");
+		CID.type="text";
+		CID.id="CID";
+		var td0=tr.insertCell(0);
+		td0.appendChild(CID);
+
+		//填写会议室名称
+		var Cname=document.createElement("input");
+		Cname.type="text";
+		Cname.id="Cname";
+		var td1=tr.insertCell(1);
+		td1.appendChild(Cname);
+
+		//填写会议室地址
+		var Caddress=document.createElement("input");
+		Caddress.type="text";
+		Caddress.id="Caddress";
+		var td2=tr.insertCell(2);
+		td2.appendChild(Caddress);
+
+		//填写会议室容量
+		var Cvolume=document.createElement("input");
+		Cvolume.type="number";
+		Cvolume.id="Cvolume";
+		var td3=tr.insertCell(3);
+		td3.appendChild(Cvolume);
+
+		//填写会议室等级
+		var Clevel=document.createElement("select");
+		Clevel.id="Clevel";
+		for(var i=1; i<10;i++){
+			var op=new Option("L"+i.toString(),"L"+i.toString());
+			Clevel.options.add(op);
+		}
+		var td4=tr.insertCell(4);
+		td4.appendChild(Clevel);
+
+		//填写会议室可使用时段
+		var Ctimestart=document.createElement("input");
+		Ctimestart.id="Ctimestart"
+		Ctimestart.type="time";
+		var Ctimeend=document.createElement("input");
+		Ctimeend.id="Ctimeend"
+		Ctimeend.type="time";
+		var td5=tr.insertCell(5);
+		td5.appendChild(Ctimestart);
+		td5.appendChild(Ctimeend);
+
+		//填写会议室设备
+		var td6=tr.insertCell(6);
+		var equip = document.getElementById("equip");
+		var equiparray = equip.value.split(" ");
+		for(var i=0;i<equiparray.length;i++){
+			if(equiparray[i]=="")
+				break;
+			var Cequip=document.createElement("input");
+			Cequip.type="checkbox";
+			Cequip.name="Cequip";
+			Cequip.id="Cequip"+i.toString();
+			Cequip.value=equiparray[i];
+			var equiptext=document.createElement("label");
+			equiptext.innerText=equiparray[i];
+			td6.appendChild(Cequip);
+			td6.appendChild(equiptext);
+		}
+
+	}
+
+	function addmeetingroom() {
+		//修改按钮
+		var bt_add = document.getElementById("bt_add");
+		if(bt_add.innerText=="添加")
+		{
+			fillin();
+			bt_add.innerText="确认";
+		}
+		else
+		{
+			//上传数据
+			bt_add.innerText="添加";
+			$.ajax({
+				type:"POST",
+				url:"/html/addRoom",
+				data:{
+					"id":$("#CID").val()
+				},
+				dataType:"json",
+				success:function (data) {
+					if(data=="1"){
+						alert("ok");
+					}else {
+						alert("no");
+					}
+				}
+			});
+
+			var CID =document.getElementById("CID");
+			var Cname = document.getElementById("Cname");
+			var Caddress =document.getElementById("Caddress");
+			var Cvolume =document.getElementById("Cvolume");
+
+			CID.innerHTML=CID.value;
+
+		}
+	}
+
+	function reset(id) {
+		var id=id.toString();
+		var bt_reset=document.getElementById(id+"_reset");
+		var CID = document.getElementById(id+"_1");
+		if(bt_reset.innerText=="修改")
+		{
+			bt_reset.innerText="确认";
+			CID.readOnly=false;
+		}
+		else
+		{
+			//上传数据
+			bt_reset.innerText="修改";
+			CID.readOnly=true;
+			CID.innerText=CID.value.toString();
+			alert(document.getElementById("10000_1").innerText);
+			alert(CID.innerText);
+			$.ajax({
+				type:"POST",
+				url:"/html/resetRoom",
+				data:{
+					"id":$("#CID").val()
+				},
+				dataType:"json",
+				success:function (data) {
+					if(data=="1"){
+						alert("ok");
+					}else {
+						alert("no");
+					}
+				}
+			});
+		}
+	}
+</script>

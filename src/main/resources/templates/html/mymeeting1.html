@@ -6,72 +6,77 @@
 
 <link rel="stylesheet" href="/css/mymeeting1.css" />
 </head>
-
 <body>
-	<table class="delete">
-		<caption>已预订会议室</caption>
-		<tr>
-			<th>日期</th>
-			<th>时间</th>
-			<th>会议室</th>
-			<th>地址</th>
-			<th>主题</th>
-			<th>申请人</th>
-			<th>状态</th>
-		</tr>
-		<tr id="001" th:each="meeting : ${meetingList}">
-			<td id="001_5" th:text="${meeting.Cstarttime}"/>
-			<td id="001_11" th:text="${meeting.starttime}"/>
-			<td id="001_1" th:text="${meeting.RoomID}" />
-			<td id="001_3" th:text="${meeting.Raddress}"/>
-			<td id="001_8" th:text="${meeting.RSID}"/>
-			<td id="001_9" th:text="${meeting.Cname}"/>
-			<td>成功</td>
-		</tr>
-	</table>
-	<br>
+<p id="002" th:each="meeting : ${meetingList}">
+	会议室编号<span id="002_1" th:text="${meeting.RoomID}" th:value = "${meeting.RoomID}"/>
+	<span id="002_2" th:text="${meeting.ConferenceID}"/>
+	会议室地址<span id="002_3" th:text="${meeting.Raddress}"/>
+	会议室容量<span id="002_4" th:text="${meeting.Rcapacity}"/>
+	会议日期<span id="002_5" th:text="${meeting.Cstarttime}"/>
+	<input hidden th:value="${meeting.Cstarttime}" id="002_27"/>
+	<span id="002_6">9:00-10:30</span>
+	<span id="002_7">投影仪</span>
+	<span id="002_8" th:text="${meeting.RSID}"/>
+	<span id="002_9" th:text="${meeting.Cname}"/>
+	<span id="002_11" th:text="${meeting.starttime}"/>
+	<span id="002_12" th:text="${meeting.Cendtime}"/>
+	<span id="002_13" th:text="${meeting.Cnum}"/>
+	<span id="002_14"><span id ="002_participant">白玉婷</span><button id="add2" onClick="add('001')">添加</button></span>
+	<span id="002_15" th:text="${meeting.numGuest}"/>
+	<span id="002_16" th:text="${meeting.sign}"/>
+	<span id="002_17" th:text="${meeting.Signtime}"/>
+	<span id="002_18"><button id="002_19" onClick="reset('001')">编辑</button></span>
+</p>
+<table class="title">
+	<caption>已预订会议室</caption>
+	<tr>
+		<th>会议室编号</th>
+		<th>会议编号</th>
+		<th>会议室地址</th>
+		<th>会议室容量</th>
+		<th>会议日期</th>
+		<th>会议室占用时间</th>
+		<th>会议室设备</th>
+		<th>申请人</th>
+		<th>会议名称</th>
+		<th>主会人</th>
+		<th>会议开始时间</th>
+		<th>会议结束时间</th>
+		<th>参会人数</th>
+		<th>参会人</th>
+		<th>外宾人数</th>
+		<th>是否签到</th>
+		<th>签到开始时间</th>
+	</tr>
+	<tr id="001" th:each="meeting : ${meetingList}">
+		<td id="001_1" th:text="${meeting.RoomID}" />
+		<!--td id="001_2" th:text="${meeting.ConferenceID}"/-->
+		<input hidden th:value="${meeting.ConferenceID}" id="001_28"/>
+		<td id="001_3" th:text="${meeting.Raddress}"/>
+		<td id="001_4" th:text="${meeting.Rcapacity}"/>
+		<td id="001_5" th:text="${meeting.Cstarttime}"/>
+		<input hidden th:value="${meeting.Cstarttime}" id="001_27"/>
+		<td id="001_6">9:00-10:30</td>
+		<td id="001_7">投影仪</td>
+		<td id="001_8" th:text="${meeting.RSID}"/>
+		<td id="001_9" th:text="${meeting.Cname}"/>
+		<td id="001_11" th:text="${meeting.starttime}"/>
+		<td id="001_12" th:text="${meeting.Cendtime}"/>
+		<td id="001_13" th:text="${meeting.Cnum}"/>
+		<td id="001_14"><span id ="001_participant">白玉婷</span><button id="add" onClick="add('001')">添加</button></td>
+		<td id="001_15" th:text="${meeting.numGuest}"/>
+		<td id="001_16" th:text="${meeting.sign}"/>
+		<td id="001_17" th:text="${meeting.Signtime}"/>
+		<td id="001_18"><button id="001_19" onClick="reset('001')">编辑</button></td>
 
-<!--<table class="delete">-->
-	<!--<tr>-->
-		<!--<th>日期</th>-->
-		<!--<th>时间</th>-->
-		<!--<th>会议室</th>-->
-		<!--<th>地址</th>-->
-		<!--<th>主题</th>-->
-		<!--<th>主会人</th>-->
-		<!--<th>状态</th>-->
-		<!--<th></th>-->
-	<!--</tr>-->
-	<!--<tr id="001">-->
-		<!--<td id="001_1">2019.02.11</td>-->
-		<!--<td id="001_2">9:00-10:00</td>-->
-		<!--<td id="001_3">会议室101</td>-->
-		<!--<td id="001_4">广b101</td>-->
-		<!--<td id="001_5">市场评估会</td>-->
-		<!--<td id="001_6">张三丰</td>-->
-		<!--<td id="001_18">成功</td>-->
-		<!--<td><button id="001_19" onClick="reset('001')">撤销</button></td>-->
-	<!--</tr>-->
-	<!--<tr>-->
-		<!--<td>2019.02.15</td>-->
-		<!--<td>9:00-10:00</td>-->
-		<!--<td>会议室105</td>-->
-		<!--<td>广b105</td>-->
-		<!--<td>市场评估会</td>-->
-		<!--<td>李四</td>-->
-		<!--<td>成功</td>-->
-		<!--<td><button onClick="reset('001')">撤销</button></td>-->
-	<!--</tr>-->
-	<!--<tr>-->
-		<!--<td>2019.02.25</td>-->
-		<!--<td>9:00-10:00</td>-->
-		<!--<td>会议室103</td>-->
-		<!--<td>广b103</td>-->
-		<!--<td>市场评估会</td>-->
-		<!--<td>王五</td>-->
-		<!--<td>失败</td>-->
-		<!--<td></td>-->
-	<!--</tr>-->
-<!--</table>-->
+	</tr>
+</table>
 </body>
 </html>
+<script>
+	function reset(id) {
+		var id=id.toString();
+
+
+	}
+</script>

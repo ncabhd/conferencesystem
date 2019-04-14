@@ -1,4 +1,4 @@
-.delete{
+table{
     width: 750px;
     text-align: center;
     border:1px solid #707070;
@@ -29,4 +29,21 @@ button{
     border: solid 1px #707070;
     border-radius:2px;
     text-align: center;
+}
+
+input{
+    width:100px;
+}
+
+#bt_add{
+    float:right;
+    margin-right: 190px;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.reset{
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
